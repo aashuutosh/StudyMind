@@ -76,6 +76,18 @@ app.post("/api/analyze", upload.single("file"), async (req, res) => {
   }
 });
 
+// Serve client build if available (unified full-stack deployment)
+const clientDist = path.join(__dirname, "../client/dist");
+app.use(express.static(clientDist));
+
+// Fallback for client-side routing
+app.get("*", (req, res, next) => {
+  if (req.path.startsWith("/api")) return next();
+  res.sendFile(path.join(clientDist, "index.html"), (err) => {
+    if (err) next();
+  });
+});
+
 // Error handler
 app.use((err, req, res, next) => {
   console.error(err);
