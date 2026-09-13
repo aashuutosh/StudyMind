@@ -1,5 +1,24 @@
+# Environment variables (NEVER commit these!)
 .env
+.env.*
+!.env.example
+server/.env
+server/.env.*
+!server/.env.example
+
+# Dependencies
 node_modules/
+**/node_modules/
+
+# Production build outputs
 dist/
+build/
+
+# Logs
 *.log
+npm-debug.log*
+yarn-debug.log*
+
+# OS metadata
 .DS_Store
+Thumbs.db
